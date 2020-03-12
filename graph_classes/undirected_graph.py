@@ -11,11 +11,6 @@ class graph:
         self.x_coordinates = []
         self.y_coordinates = []
         
-    def make_random_vertices(self, n, rate):
-        self.number_of_vertices = n
-        for i in range(0,n):
-            self.vertices[i] = (random.randint(0,rate*n), random.randint(0,rate*n))
-    
     def make_vertices(self, vertices_list):
         self.number_of_vertices = len(vertices_list)
         for i in range(0,self.number_of_vertices):
