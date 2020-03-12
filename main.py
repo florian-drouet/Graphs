@@ -25,12 +25,11 @@ if __name__ == "__main__":
     
     #Not_random
     vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
-    graph = graph()
-    graph.make_vertices(vertices_list)
+    graph = graph().make_vertices(vertices_list)
     graph.make_edges()
     graph.make_coordinates()
-    kruskal_edges = kruskal(graph.edges, list(graph.vertices.keys()))[0]
-    plotly_visualization(graph)
+    #kruskal_edges = kruskal(graph.edges, list(graph.vertices.keys()))[0]
+    #plotly_visualization(graph)
     #plotly_visualization(graph, kruskal_edges=kruskal_edges)
     #plt.scatter(graph.x_coordinates, graph.y_coordinates)
     #plt.show()
