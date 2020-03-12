@@ -1,26 +1,24 @@
-parent = dict()
-
-def make_set(sommet):
+def make_set(parent, sommet):
     '''
     La fonction make_set permet de créer un singleton 
     '''
     parent[sommet] = None
 
-def find(sommet):
+def find(parent, sommet):
     '''
     La fonction find permet de remonter l'arbre à partir d'un sommet jusqu'à la racine de l'arbre (une racine nulle n'a
     pas de parent). Elle renvoie le parent du sommet en question.
     '''
     if parent[sommet] == None:
         return sommet
-    return find(parent[sommet])
+    return find(parent, parent[sommet])
 
-def union(sommet1, sommet2):
+def union(parent, sommet1, sommet2):
     '''
     La fonction union permet de réunir deux sommets par leurs racines
     '''
-    racine1 = find(sommet1)
-    racine2 = find(sommet2)
+    racine1 = find(parent, sommet1)
+    racine2 = find(parent, sommet2)
     if racine1 != racine2:
         parent[racine2] = racine1
 
@@ -37,12 +35,13 @@ def kruskal(arcs, sommets):
     '''
     arbre_poids_minimal = []
     cout = 0
+    parent = dict()
     for sommet in sommets:
-        make_set(sommet)
+        make_set(parent, sommet)
     arcs_sorted = sorted(arcs,key=lambda cout: cout[2])
     for arc in arcs_sorted:
-        if find(arc[0]) != find(arc[1]):
-            union(arc[0], arc[1])
+        if find(parent, arc[0]) != find(parent, arc[1]):
+            union(parent, arc[0], arc[1])
             arbre_poids_minimal.append(arc)
             cout = cout + arc[2]
     return arbre_poids_minimal, cout
