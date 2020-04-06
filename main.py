@@ -16,20 +16,19 @@ if __name__ == "__main__":
         We apply kruskal's algorithms to the graph to get the edges and the total cost
         We plot the obtained minimal spanning tree
     '''
-    random_graph = random_graph().make_random_vertices(6,10).make_edges().make_coordinates()
-    #plotly_visualization(random_graph)
-    kruskal_result = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
-    #plotly_visualization(random_graph, kruskal_edges=kruskal_result[0])
-    print("Minimum spanning tree cost is : ",kruskal_result[1])
-
+    
+    #Random graph
+    random_graph = random_graph().make_random_graph(4,1)
+    plotly_visualization(random_graph)
+    kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
+    plotly_visualization(random_graph, vertices_list=kruskal_vertices_list[0])
+    print("Minimum spanning tree cost is : ",kruskal_vertices_list[1])
     
     #Not_random
     vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
-    graph = graph().make_vertices(vertices_list)
-    graph.make_edges()
-    graph.make_coordinates()
-    #kruskal_edges = kruskal(graph.edges, list(graph.vertices.keys()))[0]
-    #plotly_visualization(graph)
-    #plotly_visualization(graph, kruskal_edges=kruskal_edges)
-    #plt.scatter(graph.x_coordinates, graph.y_coordinates)
-    #plt.show()
+    graph = graph().make_graph(vertices_list)
+    print(graph.adjacency_matrix)
+    print(graph.x_coordinates)
+    print(graph.y_coordinates)
+    plotly_visualization(graph)
+    plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()))[0])
