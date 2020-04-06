@@ -1,16 +1,24 @@
 import plotly.graph_objects as go
 
-def plotly_visualization(graph, kruskal_edges = None):
+def plotly_visualization(graph, vertices_list = None):
+    """
+    Inputs :
+        - a graph object from the class "graph" or "random-graph"
+        - (Optional) - a tuple of vertices coordinates in this format : (x_coordinate, y_coordinate)
+
+    This function is used to plot graphs using the python library Plotly. Each vertice is represented as a red dot
+    and each edge as a line between two vertices.
+    """
 
     edge_x = []
     edge_y = []
     vertice_x = []
     vertice_y = []
 
-    if kruskal_edges == None:
+    if vertices_list == None:
         edges = graph.edges
     else:
-        edges = kruskal_edges
+        edges = vertices_list
 
     for edge in edges:
         edge_x.append(graph.x_coordinates[edge[0]])

@@ -16,7 +16,7 @@ if __name__ == "__main__":
         We apply kruskal's algorithms to the graph to get the edges and the total cost
         We plot the obtained minimal spanning tree
     '''
-    random_graph = random_graph().make_random_vertices(6,10).make_edges().make_coordinates()
+    random_graph = random_graph().make_random_vertices(6,10)
     #plotly_visualization(random_graph)
     kruskal_result = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
     #plotly_visualization(random_graph, kruskal_edges=kruskal_result[0])
@@ -26,10 +26,6 @@ if __name__ == "__main__":
     #Not_random
     vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
     graph = graph().make_vertices(vertices_list)
-    graph.make_edges()
-    graph.make_coordinates()
-    #kruskal_edges = kruskal(graph.edges, list(graph.vertices.keys()))[0]
-    #plotly_visualization(graph)
-    #plotly_visualization(graph, kruskal_edges=kruskal_edges)
-    #plt.scatter(graph.x_coordinates, graph.y_coordinates)
-    #plt.show()
+    plotly_visualization(graph)
+    kruskal_edges = kruskal(graph.edges, list(graph.vertices.keys()))[0]
+    plotly_visualization(graph, kruskal_edges=kruskal_edges)
