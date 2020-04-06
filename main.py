@@ -18,17 +18,21 @@ if __name__ == "__main__":
     '''
     
     #Random graph
-    random_graph = random_graph().make_random_graph(4,1)
-    plotly_visualization(random_graph)
-    kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
-    plotly_visualization(random_graph, vertices_list=kruskal_vertices_list[0])
-    print("Minimum spanning tree cost is : ",kruskal_vertices_list[1])
+    random_graph = random_graph().make_random_graph(5,1)
+    print("The number of vertices is :", random_graph.number_of_vertices)
+    print("The number of edges is :", random_graph.number_of_edges)
+    print("The edges are :\n", random_graph.edges)
+    print("The adjacency matrix is :\n", random_graph.adjacency_matrix)
+    #plotly_visualization(random_graph)
+    #kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
+    #plotly_visualization(random_graph, vertices_list=kruskal_vertices_list[0])
+    #print("Minimum spanning tree cost is : ",kruskal_vertices_list[1])
     
     #Not_random
     vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
     graph = graph().make_graph(vertices_list)
-    print(graph.adjacency_matrix)
-    print(graph.x_coordinates)
-    print(graph.y_coordinates)
-    plotly_visualization(graph)
-    plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()))[0])
+    #print(graph.adjacency_matrix)
+    #print(graph.x_coordinates)
+    #print(graph.y_coordinates)
+    #plotly_visualization(graph)
+    #plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()))[0])

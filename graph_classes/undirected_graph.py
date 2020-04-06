@@ -50,6 +50,7 @@ class graph:
                     coordinate_y2 = list(self.vertices.values())[vertice_2][1]
                     euclidean_distance = int(np.sqrt((coordinate_x2-coordinate_x1)**2+(coordinate_y2-coordinate_y1)**2))
                     self.edges.append([vertice_1,vertice_2,euclidean_distance])
+        self.number_of_edges = len(self.edges)
     
     def make_adjacency_matrix(self):
         """Performs creation of adjacency matrix (as specified in __init__ doc)"""
