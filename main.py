@@ -30,9 +30,12 @@ if __name__ == "__main__":
     
     #Not_random
     vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
+    #vertices_list = ((0,0), (2,2), (2,5), (4,0)) for medium article
     graph = graph().make_graph(vertices_list)
+    print(graph.adjacency_matrix)
     #print(graph.adjacency_matrix)
     #print(graph.x_coordinates)
     #print(graph.y_coordinates)
-    #plotly_visualization(graph)
-    #plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()))[0])
+    print(graph.edges)
+    plotly_visualization(graph)
+    plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()))[0])
