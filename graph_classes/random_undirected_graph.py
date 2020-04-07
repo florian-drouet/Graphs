@@ -14,14 +14,15 @@ class random_graph(graph):
     def __init__(self):
         super().__init__()
         
-    def make_random_graph(self, n, rate):
+    def make_graph(self, n, rate):
         """Performs the creation of a random graph. Each coordinates of a vertice are randomly created and then scaled with "rate"."""
         self.number_of_vertices = n
         for i in range(0,n):
             self.vertices[i] = (random.randint(0,rate*n), random.randint(0,rate*n))
+            self.successors[i] = []
         #if a graph has vertices with same coordinates then we recreate a new graph
         if self.check_vertices() == True:
-            self.make_random_graph(n, rate)
+            self.make_graph(n, rate)
         self.make_edges()
         self.make_adjacency_matrix()
         self.make_coordinates()

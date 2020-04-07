@@ -28,12 +28,14 @@ class graph:
         self.x_coordinates = []
         self.y_coordinates = []
         self.adjacency_matrix = []
+        self.successors = dict()
         
     def make_graph(self, vertices_list):
         """Performs the creation of a graph from vertices_list (vertices+edges+coordinates)"""
         self.number_of_vertices = len(vertices_list)
         for i in range(0,self.number_of_vertices):
             self.vertices[i] = vertices_list[i]
+            self.successors[i] = []
         self.make_edges()
         self.make_adjacency_matrix()
         self.make_coordinates()
@@ -64,6 +66,7 @@ class graph:
                     coordinate_y2 = list(self.vertices.values())[vertice_2][1]
                     euclidean_distance = int(np.sqrt((coordinate_x2-coordinate_x1)**2+(coordinate_y2-coordinate_y1)**2))
                     self.adjacency_matrix[vertice_1,vertice_2] = euclidean_distance
+                    self.successors[vertice_1].append(vertice_2)
 
     def make_coordinates(self):
         """Performs creation of coordinates' lists (as specified in __init__ doc)"""
