@@ -43,7 +43,7 @@ class graph:
         """Performs creation of edges (as specified in __init__ doc)"""
         for vertice_1 in self.vertices.keys():
             for vertice_2 in self.vertices.keys():
-                if vertice_1 != vertice_2:
+                if vertice_1 != vertice_2 and vertice_1<vertice_2:
                     coordinate_x1 = list(self.vertices.values())[vertice_1][0]
                     coordinate_y1 = list(self.vertices.values())[vertice_1][1]
                     coordinate_x2 = list(self.vertices.values())[vertice_2][0]

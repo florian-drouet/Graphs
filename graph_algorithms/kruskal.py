@@ -22,7 +22,7 @@ def union(parent, sommet1, sommet2):
     if racine1 != racine2:
         parent[racine2] = racine1
 
-def kruskal(arcs, sommets):
+def kruskal(arcs, sommets, clusters=1):
     '''
     Ci-après la deuxième version de l'algorithme de Kruskal codée via la technique union-find.
     
@@ -44,4 +44,14 @@ def kruskal(arcs, sommets):
             union(parent, arc[0], arc[1])
             arbre_poids_minimal.append(arc)
             cout = cout + arc[2]
+        if list(parent.values()).count(None) == clusters:
+            break
     return arbre_poids_minimal, cout
+
+if __name__ == "__main__":
+    edges = [[1,5,10],[3,5,20],[2,8,30],[1,3,35],[6,7,40],[6,8,50],[7,8,75],
+             [2,6,80],[2,4,100],[2,5,150],[4,7,180],[2,3,200],[3,4,200],[1,4,300],[2,7,300]]
+    vertices = [1,2,3,4,5,6,7,8]
+    clusters = 2
+    kruskal_result = kruskal(edges,vertices,clusters)
+    print(kruskal_result[0])

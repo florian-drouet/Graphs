@@ -3,6 +3,7 @@ from graph_classes.random_undirected_graph import random_graph
 from graph_classes.undirected_graph import graph
 from plotly_graphs import plotly_visualization
 from graph_algorithms.kruskal import kruskal
+import random
 
 if __name__ == "__main__":
     
@@ -18,24 +19,29 @@ if __name__ == "__main__":
     '''
     
     #Random graph
-    random_graph = random_graph().make_random_graph(5,1)
-    print("The number of vertices is :", random_graph.number_of_vertices)
-    print("The number of edges is :", random_graph.number_of_edges)
-    print("The edges are :\n", random_graph.edges)
-    print("The adjacency matrix is :\n", random_graph.adjacency_matrix)
+    random.seed(9999)
+    random_graph = random_graph().make_random_graph(50,100)
+    #print("The number of vertices is :", random_graph.number_of_vertices)
+    #print("The number of edges is :", random_graph.number_of_edges)
+    #print("The edges are :\n", random_graph.edges)
+    #print("The adjacency matrix is :\n", random_graph.adjacency_matrix)
     #plotly_visualization(random_graph)
-    #kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
+    kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()), clusters=3)
     #plotly_visualization(random_graph, vertices_list=kruskal_vertices_list[0])
     #print("Minimum spanning tree cost is : ",kruskal_vertices_list[1])
     
     #Not_random
-    vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
-    #vertices_list = ((0,0), (2,2), (2,5), (4,0)) for medium article
+    #vertices_list = ((1,2), (2,5), (3,4), (3,3), (0,1), (4,2))
+    vertices_list = ((0,0), (2,2), (2,5), (4,0)) #for medium article
     graph = graph().make_graph(vertices_list)
-    print(graph.adjacency_matrix)
+    kruskal_vertices_list = kruskal(graph.edges, list(graph.vertices.keys()),2)[0]
+    #print(graph.adjacency_matrix)
     #print(graph.adjacency_matrix)
     #print(graph.x_coordinates)
     #print(graph.y_coordinates)
-    print(graph.edges)
-    plotly_visualization(graph)
-    plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()))[0])
+    #print(graph.edges)
+    print(graph.number_of_edges)
+    n = graph.number_of_vertices
+    print((n*(n-1)/2))
+    #plotly_visualization(graph)
+    #plotly_visualization(graph, vertices_list=kruskal(graph.edges, list(graph.vertices.keys()),2)[0])
