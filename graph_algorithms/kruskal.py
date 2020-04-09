@@ -44,8 +44,8 @@ def kruskal(arcs, sommets, clusters=1):
             union(parent, arc[0], arc[1])
             arbre_poids_minimal.append(arc)
             cout = cout + arc[2]
-        if list(parent.values()).count(None) == clusters:
-            break
+        #if list(parent.values()).count(None) == clusters:
+        #    break
     return arbre_poids_minimal, cout
 
 if __name__ == "__main__":
