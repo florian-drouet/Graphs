@@ -28,35 +28,37 @@ if __name__ == "__main__":
     
     #Random graph
     #random.seed(9999)
-    '''
+    
     empirical_complexity = dict()
     theorical_complexity = dict()
     for number_of_vertices in range(0,500):
         print(kruskal_complexity(number_of_vertices))
-        theorical_complexity[number_of_vertices] = kruskal_complexity(number_of_vertices)
-    random_graph = random_graph()
+        theorical_complexity[(number_of_vertices*(number_of_vertices-1))/2] = kruskal_complexity(number_of_vertices)
+    random_graph_plot = random_graph()
     for number_of_vertices in range(2,432,30):        
-        random_graph.make_random_graph(n=number_of_vertices,rate=1000)
+        random_graph_plot.make_random_graph(n=number_of_vertices,rate=10000)
         start = time.time()
-        kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
+        kruskal_vertices_list = kruskal(random_graph_plot.edges, list(random_graph_plot.vertices.keys()))
         end = time.time()
-        empirical_complexity[number_of_vertices] = end-start
+        empirical_complexity[(number_of_vertices*(number_of_vertices-1))/2] = end-start
 
-    print(empirical_complexity)
-    plt.scatter(x=list(empirical_complexity.keys()),y=100*list(empirical_complexity.values()))
-    plt.plot(list(theorical_complexity.values()))
+    #print(empirical_complexity)
+    #print(theorical_complexity)
+    plt.scatter(x=list(empirical_complexity.keys()),y=list(empirical_complexity.values()))
+    #plt.plot(list(theorical_complexity.values()))
     plt.show()
-    '''
+
     random_graph = random_graph()
-    random_graph.make_random_graph(20,100)
+    random_graph.make_random_graph(50,100)
     #print("The number of vertices is :", random_graph.number_of_vertices)
     #print("The number of edges is :", random_graph.number_of_edges)
     #print("The edges are :\n", random_graph.edges)
     #print("The adjacency matrix is :\n", random_graph.adjacency_matrix)
     #plotly_visualization(random_graph)
-    #kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()))
-    #kruskal_vertices_list = kruskal_v2(random_graph.edges, list(random_graph.vertices.keys()))
+    #kruskal_vertices_list = kruskal(random_graph.edges, list(random_graph.vertices.keys()),clusters=5)
     #plotly_visualization(random_graph, edges_list=kruskal_vertices_list[0])
+    #kruskal_vertices_list_v2 = kruskal_v2(random_graph.edges, list(random_graph.vertices.keys()), clusters = 5)
+    #plotly_visualization(random_graph, edges_list=kruskal_vertices_list_v2[0])
     #print("Minimum spanning tree cost is : ",kruskal_vertices_list[1])
     #random_graph.make_random_graph(100,100)
     #plotly_visualization(random_graph)
@@ -71,7 +73,7 @@ if __name__ == "__main__":
                      (15,15), (12,16), (13,18), (14,14), (12,12))
     graph = graph().make_graph(vertices_list)
     #kruskal_vertices_list = kruskal(graph.edges, list(graph.vertices.keys()),5)[0]
-    kruskal_vertices_list = kruskal_v2(graph.edges, list(graph.vertices.keys()))[0]
+    #kruskal_vertices_list = kruskal_v2(graph.edges, list(graph.vertices.keys()))[0]
     #print(graph.adjacency_matrix)
     #print(graph.adjacency_matrix)
     #print(graph.x_coordinates)

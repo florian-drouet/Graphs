@@ -1,13 +1,14 @@
+import numpy as np
+
 def make_set(parent, vertex):
     '''
-    La fonction make_set permet de créer un singleton 
+    Make_set function attributes "None" value to each vertex in parent dictionnary
     '''
     parent[vertex] = None
 
 def find(parent, vertex):
     '''
-    La fonction find permet de remonter l'arbre à partir d'un vertex jusqu'à la racine de l'arbre (une racine nulle n'a
-    pas de parent). Elle renvoie le parent du vertex en question.
+    Find function recursively searches for the root of a given vertex
     '''
     if parent[vertex] == None:
         return vertex
@@ -15,7 +16,7 @@ def find(parent, vertex):
 
 def union(parent, vertex1, vertex2):
     '''
-    La fonction union permet de réunir deux vertices par leurs racines
+    Union function unites two trees under the same root
     '''
     root1 = find(parent, vertex1)
     root2 = find(parent, vertex2)
@@ -24,15 +25,10 @@ def union(parent, vertex1, vertex2):
 
 def kruskal(edges, vertices, clusters=1):
     '''
-    Ci-après la deuxième version de l'algorithme de Kruskal codée via la technique union-find.
-    
-    On commence par créer un singleton par vertex puis on trie les edges (un edge est un triplé composé de la façon
-    suivante : vertex1, vertex2, poids de l'edge vertex1 vers vertex2)
-    
-    Dans cette liste d'edge trié on cherche les racines des vertices 1 et 2 (pour chaque edge de la liste des edges triés)
-    via la fonction find. Puis, s'ils n'ont pas la même racine, alors on rassemble les deux vertices via la fonction 
-    union puis on rajoute l'edge dans l'edge de recouvrement de poids minimal.
+    Naive kruskal's algorithm implementation for minimum spanning tree
     '''
+    if clusters > len(vertices):
+        return print("Error : the number of vertices is inferior to the number of clusters.")
     minimum_spanning_tree = []
     cost = 0
     parent = dict()
@@ -80,7 +76,7 @@ def union_v2(parent, rang, sommet1, sommet2):
             if rang[racine1] == rang[racine2]:
                 rang[racine1] = rang[racine1] + 1
 
-def kruskal_v2(arcs, sommets):
+def kruskal_v2(arcs, sommets, clusters):
     '''
     Ci-après la deuxième version de l'algorithme de Kruskal codée via la technique union-find.
     
@@ -103,7 +99,8 @@ def kruskal_v2(arcs, sommets):
             union_v2(parent, rang, arc[0], arc[1])
             arbre_poids_minimal.append(arc)
             cout = cout + arc[2]
-        print(parent)
+        if len(np.unique(list(parent.values()))) == clusters:
+            break
     return arbre_poids_minimal, cout
 
 if __name__ == "__main__":
@@ -113,5 +110,5 @@ if __name__ == "__main__":
     clusters = 1
     kruskal_result = kruskal(edges,vertices,clusters)
     print(kruskal_result[0])
-    kruskal_result_v2 = kruskal_v2(edges,vertices)
+    kruskal_result_v2 = kruskal_v2(edges,vertices, clusters)
     print(kruskal_result[0])

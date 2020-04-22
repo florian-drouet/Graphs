@@ -118,6 +118,50 @@ def plotly_visualization(graph, edges_list = None):
                     )
     fig.show()
 
+def make_set(parent, vertex):
+    '''
+    Make_set function attributes "None" value to each vertex in parent dictionnary
+    '''
+    parent[vertex] = None
+
+def find(parent, vertex):
+    '''
+    Find function recursively searches for the root of a given vertex
+    '''
+    if parent[vertex] == None:
+        return vertex
+    return find(parent, parent[vertex])
+
+def union(parent, vertex1, vertex2):
+    '''
+    Union function unites two trees under the same root
+    '''
+    root1 = find(parent, vertex1)
+    root2 = find(parent, vertex2)
+    if root1 != root2:
+        parent[root2] = root1
+
+def kruskal(edges, vertices, clusters=1):
+    '''
+    Naive kruskal's algorithm implementation for minimum spanning tree
+    '''
+    if clusters > len(vertices):
+        return print("Error : the number of vertices is inferior to the number of clusters.")
+    minimum_spanning_tree = []
+    cost = 0
+    parent = dict()
+    for vertex in vertices:
+        make_set(parent, vertex)
+    edges_sorted = sorted(edges,key=lambda cost: cost[2])
+    for edge in edges_sorted:
+        if find(parent, edge[0]) != find(parent, edge[1]):
+            union(parent, edge[0], edge[1])
+            minimum_spanning_tree.append(edge)
+            cost = cost + edge[2]
+        if list(parent.values()).count(None) == clusters:
+            break
+    return minimum_spanning_tree, cost
+
 if __name__ == "__main__":
     vertices_list = ((0,0), (1,2), (2,1), (3,4), (3,3),
                      (30,0), (34,2), (27,1), (38,6), (31,3),
@@ -132,6 +176,12 @@ if __name__ == "__main__":
     graph.make_graph(vertices_list)
     #We launch the data visualization of the graph
     plotly_visualization(graph)
+    #We apply kruskal's algorithm to the graph
+    kruskal_vertices_list = kruskal(graph.edges, list(graph.vertices.keys()), clusters=5)
+    #We launch the data visualization of the clustered graph
+    plotly_visualization(graph, kruskal_vertices_list[0])
+    
 
     print("We created a complete graph with",graph.number_of_vertices,"vertices.\nThe dictionnary 'vertices' is :",graph.vertices,"\n")
     print("A total of",graph.number_of_edges,"vertices has been created and the total list of edges is :\n", graph.edges)
+    print("Edges are :",kruskal_vertices_list[0],"\nTotal cost is :",kruskal_vertices_list[1])

@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-class random_graph:
+class random_graph():
     """
     This class implements an undirected random graph.
 
